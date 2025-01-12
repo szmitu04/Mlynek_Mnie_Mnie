@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Tygodniowy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark {
+      background-color: #121212;
+      color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo img {
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .menu button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #ccc;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .menu button.active {
+      background-color: #4b4bf5;
+      color: white;
+    }
+
+    .menu button:hover {
+      background-color: #3737d3;
+      color: white;
+    }
+
+    .filters {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .filters input, .filters select {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .filters .filter-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .filters button {
+      padding: 8px 16px;
+      font-size: 14px;
+      border: none;
+      background-color: #4b4bf5;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .filters button:hover {
+      background-color: #3737d3;
+    }
+
+    .timetable {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .timetable .day {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .timetable .day h3 {
+      font-size: 16px;
+      margin: 0 0 10px 0;
+    }
+
+    .event {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .event.lab {
+      background-color: #4caf50;
+    }
+
+    .event.lecture {
+      background-color: #2196F3;
+    }
+
+    .event.project {
+      background-color: #8bc34a;
+    }
+
+    .event.auditory {
+      background-color: #ff9800;
+    }
+
+    .event.language {
+      background-color: #795548;
+    }
+
+    .legend {
+      margin-top: 20px;
+    }
+
+    .legend .item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .legend .color-box {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    .date-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .date-header button {
+      padding: 8px 16px;
+      border: none;
+      background-color: #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .date-header button:hover {
+      background-color: #bbb;
+    }
+  </style>
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+    function switchView(view) {
+      const timetable = document.querySelector('.timetable');
+      const filters = document.querySelector('.filters');
+
+      if (view === 'day') {
+        timetable.style.display = 'block'; // Mock switching to daily view
+        timetable.innerHTML = `<div class="day">
+                    <h3>Wtorek</h3>
+                    <div class="event lab">14:15 - 16:00 Sztuczna inteligencja (Laboratorium)</div>
+                    <div class="event lecture">14:15 - 16:00 Sieci Komputerowe (Wykład)</div>
+                </div>`;
+      } else if (view === 'week') {
+        location.reload(); // Mock switching back to weekly view
+      } else if (view === 'month') {
+        timetable.style.display = 'block';
+        timetable.innerHTML = '<p>Miesięczny widok w budowie.</p>'; // Placeholder for monthly view
+      }
+
+      document.querySelectorAll('.menu button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`.menu button[data-view="${view}"]`).classList.add('active');
+    }
+  </script>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="header-logo">
+      <img src="https://via.placeholder.com/100" alt="Logo">
+      <h1>Zachodniopomorski Uniwersytet Technologiczny</h1>
+    </div>
+  </header>
+
+  <div class="menu">
+    <button data-view="day" onclick="switchView('day')">Plan dnia</button>
+    <button data-view="week" class="active" onclick="switchView('week')">Tydzień</button>
+    <button data-view="month" onclick="switchView('month')">Miesiąc</button>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()">Zmień temat</button>
+  <div class="filters">
+    <input type="text" placeholder="Wykładowca">
+    <input type="text" placeholder="Sala">
+    <input type="text" placeholder="Przedmiot">
+    <input type="text" placeholder="Grupa">
+    <input type="text" placeholder="Numer albumu">
+    <div class="filter-buttons">
+      <button>Szukaj</button>
+      <button>Wyczyść filtry</button>
+    </div>
+  </div>
+
+  <div class="date-header">
+    <button>&lt;</button>
+    <h2>6-12 sty 2025</h2>
+    <button>&gt;</button>
+  </div>
+
+  <div class="timetable">
+    <div class="day">
+      <h3>Pon 6</h3>
+      <div class="event project">8:15 - 11:15 Inżynierski projekt zespołowy 1 (P)</div>
+    </div>
+    <div class="day">
+      <h3>Wt 7</h3>
+    </div>
+    <div class="day">
+      <h3>Śr 8</h3>
+      <div class="event auditory">12:30 - 18:00 Wychowanie fizyczne 1 (A)</div>
+    </div>
+    <div class="day">
+      <h3>Czw 9</h3>
+      <div class="event lab">14:15 - 16:00 Sztuczna inteligencja (L)</div>
+      <div class="event language">14:15 - 16:00 Język angielski 2 (Lek)</div>
+    </div>
+    <div class="day">
+      <h3>Pt 10</h3>
+      <div class="event lecture">8:15 - 10:
+        15 Matematyka dyskretna (W)</div>
+      <div class="event lab">10:30 - 12:00 Podstawy programowania (L)</div>
+    </div>
+    <div class="day">
+      <h3>Sob 11</h3>
+      <div class="event project">9:00 - 13:00 Projekt zaliczeniowy (P)</div>
+    </div>
+    <div class="day">
+      <h3>Nie 12</h3>
+      <div class="event lecture">10:00 - 12:00 Zarządzanie projektami (W)</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <h3>Legenda:</h3>
+    <div class="item">
+      <div class="color-box" style="background-color: #4caf50;"></div>
+      <span>Laboratorium</span>
+    </div>
+    <div class="item">
+      <div class="color-box" style="background-color: #2196F3;"></div>
+      <span>Wykład</span>
+    </div>
+    <div class="item">
+      <div class="color-box" style="background-color: #8bc34a;"></div>
+      <span>Projekt</span>
+    </div>
+    <div class="item">
+      <div class="color-box" style="background-color: #ff9800;"></div>
+      <span>Zajęcia audytoryjne</span>
+    </div>
+    <div class="item">
+      <div class="color-box" style="background-color: #795548;"></div>
+      <span>Język</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
