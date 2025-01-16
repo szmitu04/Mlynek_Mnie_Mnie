@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const legendContainer = document.querySelector(".legend");
     const counterContainer = document.querySelector(".lesson-counter");
 
-   // let favoriteLinks = getFavoriteLinks() || [];
+    // let favoriteLinks = getFavoriteLinks() || [];
     let currentDate = new Date();
     let currentView = "timeGridWeek";
     let currentScheduleData = null;
@@ -735,9 +735,91 @@ document.addEventListener("DOMContentLoaded", function () {
         // Удаляем лишние кнопки при загрузке
         removeExtraButtons();
     });
+// Получаем кнопки изменения размера шрифта
+    const fontSizeButtons = document.querySelectorAll('.font-size-switcher button');
 
+// Функция для изменения размера шрифта
+    function changeFontSize(size) {
+        document.documentElement.style.setProperty('--font-size', size);
+        console.log(`Размер шрифта изменен на: ${size}`);
+    }
 
+// Добавляем обработчики событий для каждой кнопки
+    fontSizeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            try {
+                // Убираем активный класс со всех кнопок
+                fontSizeButtons.forEach(btn => btn.classList.remove('active'));
+                // Добавляем активный класс к текущей кнопке
+                button.classList.add('active');
 
+                // Получаем значение размера шрифта
+                const size = button.getAttribute('data-size');
+                if (!size) {
+                    console.error('Атрибут data-size отсутствует на кнопке');
+                    return;
+                }
+
+                // Изменяем размер шрифта
+                if (size === 'normal') {
+                    changeFontSize('16px');
+                } else if (size === 'large') {
+                    changeFontSize('20px');
+                } else if (size === 'extra-large') {
+                    changeFontSize('24px');
+                } else {
+                    console.error(`Неизвестный размер шрифта: ${size}`);
+                }
+            } catch (error) {
+                console.error('Произошла ошибка при обработке кнопки:', error);
+            }
+        });
+    });
+// Получаем кнопки смены темы
+    const themeButtons = document.querySelectorAll('.theme-switcher button');
+
+// Функция для изменения темы
+    function changeTheme(theme) {
+        // Убираем предыдущие классы темы с <body>
+        document.body.classList.remove('light-theme', 'dark-theme', 'high-contrast-theme');
+
+        // Добавляем новый класс темы
+        if (theme === 'light') {
+            document.body.classList.add('light-theme');
+        } else if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        } else if (theme === 'high-contrast') {
+            document.body.classList.add('high-contrast-theme');
+        }
+
+        console.log(`Тема изменена на: ${theme}`);
+    }
+
+// Добавляем обработчики событий для кнопок
+    themeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Убираем активный класс со всех кнопок
+            themeButtons.forEach(btn => btn.classList.remove('active'));
+            // Добавляем активный класс к текущей кнопке
+            button.classList.add('active');
+
+            // Изменяем тему
+            const theme = button.getAttribute('data-theme');
+            changeTheme(theme);
+        });
+    });
+    const allButtons = document.querySelectorAll('button, .fc-today-button, .fc-prev-button, .fc-next-button, .dropdown-btn');
+
+// Проверяем каждую кнопку
+    allButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Убираем класс active со всех кнопок
+            allButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Добавляем active только на текущую кнопку
+            button.classList.add('active');
+        });
+    });
 
     loadFiltersFromUrl();
     initializeCalendar();
