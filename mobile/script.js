@@ -153,8 +153,32 @@ function clearFilters() {
 
 
 function setView(view) {
-    console.log(`Setting view to: ${view}`);
+    const allViews = document.querySelectorAll('.schedule-view');
+    allViews.forEach(viewElement => viewElement.classList.add('hidden'));
+
+    const selectedView = document.getElementById(`${view}-view`);
+    selectedView.classList.remove('hidden');
+
+    if (view === 'day') {
+        console.log('Centrowanie na bieżącym dniu...');
+        // Możesz dodać logikę do przesunięcia widoku dnia
+    } else if (view === 'week') {
+        console.log('Centrowanie na bieżącym tygodniu...');
+        // Automatycznie centrowanie siatki tygodnia
+    } else if (view === 'month') {
+        console.log('Centrowanie na bieżącym miesiącu...');
+        // Ustaw logikę centrowania miesiąca
+    }
 }
+
+function goToToday() {
+    const today = new Date();
+    console.log('Dziś jest:', today);
+
+    // Możesz automatycznie zaznaczyć dzisiejszy dzień w każdym widoku
+    setView('day');
+}
+
 
 function goToToday() {
     console.log('Navigating to today.');

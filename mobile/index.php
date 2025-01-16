@@ -60,20 +60,6 @@
     <div class="filters">
         <button class="filters-toggle" onclick="toggleDropdown('filter-menu')">Filtry zajęć</button>
         <div id="filter-menu" class="dropdown-menu hidden">
-            <label for="lecturer">Wykładowca</label>
-            <input type="text" id="lecturer" placeholder="Wprowadź wykładowcę">
-
-            <label for="room">Sala</label>
-            <input type="text" id="room" placeholder="Wprowadź salę">
-
-            <label for="subject">Przedmiot</label>
-            <input type="text" id="subject" placeholder="Wprowadź przedmiot">
-
-            <label for="group">Grupa</label>
-            <input type="text" id="group" placeholder="Wprowadź grupę">
-
-            <label for="album-number">Numer albumu</label>
-            <input type="text" id="album-number" placeholder="Wprowadź numer albumu">
 
             <!-- Typy zajęć -->
             <h3>Typ zajęć</h3>
@@ -100,20 +86,84 @@
 
 
 
-    <div class="schedule">
-        <div>Pon</div>
-        <div>Wt</div>
-        <div>Śr</div>
-        <div>Czw</div>
-        <div>Pt</div>
-        <div>Sob</div>
-        <div>Nd</div>
+    <div class="schedule-container">
+        <!-- Widok tygodnia -->
+        <div id="weekly-view" class="schedule-view">
+            <div class="week-grid">
+                <!-- Godziny w osi Y -->
+                <div class="time-labels">
+                    <div>6:00</div>
+                    <div>7:00</div>
+                    <div>8:00</div>
+                    <div>9:00</div>
+                    <div>10:00</div>
+                    <div>11:00</div>
+                    <div>12:00</div>
+                    <div>13:00</div>
+                    <div>14:00</div>
+                    <div>15:00</div>
+                    <div>16:00</div>
+                    <div>17:00</div>
+                    <div>18:00</div>
+                    <div>19:00</div>
+                    <div>20:00</div>
+                    <div>21:00</div>
+                    <div>22:00</div>
+                </div>
+                <!-- Siatka tygodnia -->
+                <div class="grid">
+                    <div class="day-header">Pon</div>
+                    <div class="day-header">Wt</div>
+                    <div class="day-header">Śr</div>
+                    <div class="day-header">Czw</div>
+                    <div class="day-header">Pt</div>
+                    <div class="day-header">Sob</div>
+                    <div class="day-header">Nd</div>
 
-        <div class="wyklad">9:00-10:30 Wykład</div>
-        <div class="projekt">11:00-12:30 Projekt</div>
-        <div class="lektorat">13:00-14:30 Lektorat</div>
-        <div class="laboratorium">15:00-16:30 Laboratorium</div>
+                    <!-- Przyklady zajęć -->
+                    <div class="class laboratorium" style="grid-column: 1; grid-row: 8 / 10;">
+                        Laboratorium<br>8:00-9:30
+                    </div>
+                    <div class="class wyklad" style="grid-column: 2; grid-row: 10 / 11;">
+                        Wykład<br>10:00-11:00
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Widok dnia -->
+        <div id="daily-view" class="schedule-view hidden">
+            <ul class="daily-list">
+                <li class="class wyklad">
+                    <strong>Wykład:</strong> 8:00-9:30<br>Sala: 101
+                </li>
+                <li class="class laboratorium">
+                    <strong>Laboratorium:</strong> 10:00-12:00<br>Sala: 202
+                </li>
+            </ul>
+        </div>
+
+        <!-- Widok miesiąca -->
+        <div id="monthly-view" class="schedule-view hidden">
+            <div class="month-grid">
+                <div class="day">1</div>
+                <div class="day">2</div>
+                <div class="day">3</div>
+                <div class="day">4</div>
+                <div class="day">5</div>
+                <div class="day">6</div>
+                <div class="day">7</div>
+                <!-- Przyklad wpisu zajęć w dniu -->
+                <div class="day">
+                    <div class="event">
+                        Wykład<br>10:00-11:00
+                    </div>
+                </div>
+                <!-- Reszta dni miesiąca -->
+            </div>
+        </div>
     </div>
+
 
     <div class="legend">
         <span class="laboratorium">Laboratorium</span>
