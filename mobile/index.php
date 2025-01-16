@@ -64,9 +64,9 @@
         <div class="filter-label">
             <button class="filters-toggle" onclick="toggleDropdown('filter-menu')">Filtry zajęć</button>
             <div class="font-size-selector">
-                <button onclick="setFontSize('small')">Mały</button>
-                <button onclick="setFontSize('medium')">Zwykły</button>
-                <button onclick="setFontSize('large')">Duży</button>
+                <button class="fss-button" onclick="setFontSize('small')">A</button>
+                <button class="fss-button" onclick="setFontSize('medium')" style="font-size: 18px;">A</button>
+                <button class="fss-button" onclick="setFontSize('large')" style="font-size: 22px;">A</button>
             </div>
             <div class="theme-switcher">
                 <button onclick="setTheme('light')">Zwykły</button>
