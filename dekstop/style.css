@@ -350,6 +350,17 @@ button:hover {
     color: #fff;
 }
 
+.event {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 5px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    overflow: hidden;
+}
 
 .track-all {
     display: flex;
@@ -1069,4 +1080,46 @@ button.active, .dropdown-btn.active {
 }
 
 
+@media (max-width: 768px) {
+    .container {
+        display: flex;
+        flex-direction: column; /* Układ pionowy */
+        align-items: center;   /* Wyśrodkowanie elementów */
+        gap: 20px;            /* Odstępy między kalendarzem a filtrami */
+    }
+
+    .schedule-container {
+        order: 1;              /* Kalendarz u góry */
+        width: 100%;           /* Zajmuje całą szerokość */
+    }
+
+    .sidebar {
+        order: 2;              /* Filtry na dole */
+        width: 100%;           /* Zajmuje całą szerokość */
+        text-align: center;    /* Wyśrodkowanie zawartości */
+    }
+
+    .filter-container {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        gap: 10px;             /* Zmniejszenie odstępów */
+    }
+
+    .schedule-container {
+        padding: 0;            /* Usuń marginesy */
+    }
+
+    .sidebar {
+        padding: 10px;         /* Zmniejsz padding */
+    }
+
+    .filter-container button,
+    .filter-container input[type="text"] {
+        font-size: 14px;       /* Zmniejsz rozmiar czcionki */
+    }
+}
 

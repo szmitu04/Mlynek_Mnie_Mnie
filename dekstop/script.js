@@ -63,6 +63,29 @@ document.addEventListener("DOMContentLoaded", function () {
             body.classList.remove("dark-mode", "high-contrast");
         });
     });
+    fetch('/api/events.php?start=2025-01-01&end=2025-01-31')
+        .then(response => response.json())
+        .then(data => {
+            const calendar = document.getElementById('calendar');
+            data.forEach(event => {
+                const eventEl = document.createElement('div');
+                eventEl.classList.add('event');
+                eventEl.style.backgroundColor = event.color;
+                eventEl.style.gridRowStart = `${getRowFromTime(event.start_time)}`;
+                eventEl.style.gridRowEnd = `${getRowFromTime(event.end_time)}`;
+                eventEl.textContent = event.title;
+                eventEl.addEventListener('click', () => {
+                    alert(`Przedmiot: ${event.title}\nNauczyciel: ${event.teacher}\nSala: ${event.room}`);
+                });
+                calendar.appendChild(eventEl);
+            });
+        });
+
+    function getRowFromTime(time) {
+        const [hour, minute] = time.split(' ')[1].split(':');
+        return parseInt(hour, 10) - 7 + 1; // Dopasowanie do widoku siatki
+    }
+
 
     function initializeCalendar() {
         calendar = new FullCalendar.Calendar(calendarEl, {
